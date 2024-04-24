@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tweets-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tweets-service
+  template:
+    metadata:
+      labels:
+        app: tweets-service
+    spec:
+      containers:
+      - name: tweets-service
+        image: 9979999/sa-final-project-tweets-service:latest
+        env:
+          - name: TWEET_SERVICE_DB_URL
+            value: jdbc:mysql://tweetdb-mysql-service:3306/tweetdb
+          - name: USER_SERVICE_RABBITMQ_HOST
+            value: rabbitmq
+        ports:
+        - containerPort: 8001
+

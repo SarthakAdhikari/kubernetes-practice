@@ -1,0 +1,4 @@
+resources:
+  - tweet-service-deployment.yml
+  - tweet-service.yml
+

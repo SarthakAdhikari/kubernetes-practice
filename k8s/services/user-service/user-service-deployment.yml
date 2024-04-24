@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: 9979999/sa-final-project-user-service:latest
+        imagePullPolicy: Always
+        env:
+          - name: USER_SERVICE_DB_URL
+            value: jdbc:mysql://userdb-mysql-service:3306/userdb
+          - name: USER_SERVICE_RABBITMQ_HOST
+            value: rabbitmq
+        ports:
+        - containerPort: 8000
+

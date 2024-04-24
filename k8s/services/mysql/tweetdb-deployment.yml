@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tweetdb-mysql
+spec:
+  selector:
+    matchLabels:
+      app: tweetdb-mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: tweetdb-mysql
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: tweetdb-mysql
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: rootpassword
+        - name: MYSQL_USERNAME
+          value: user
+        - name: MYSQL_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: tweetdb
+        ports:
+        - containerPort: 3306
+          name: mysql-port
+        volumeMounts:
+        - name: mysql-persistent-storage-tweetdb
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage-tweetdb
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim-tweetdb
+

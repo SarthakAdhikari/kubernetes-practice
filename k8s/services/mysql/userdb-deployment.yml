@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userdb-mysql
+spec:
+  selector:
+    matchLabels:
+      app: userdb-mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: userdb-mysql
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: userdb-mysql
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: root1234
+        - name: MYSQL_USERNAME
+          value: username 
+        - name: MYSQL_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: userdb 
+        ports:
+        - containerPort: 3306
+          name: userdb-mysql
+        volumeMounts:
+        - name: mysql-persistent-storage-userdb
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage-userdb
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim-userdb

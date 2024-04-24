@@ -1,0 +1,1 @@
+export COMPOSE_PROJECT_NAME="tweet-service" && docker-compose up

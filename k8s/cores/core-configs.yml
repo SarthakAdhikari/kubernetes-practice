@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  # Configuration for user-service
+  USER_SERVICE_DB_URL: "jdbc:mysql://mysql-user-service:3306/userdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true"
+  USER_SERVICE_RABBITMQ_HOST: "rabbitmq"
+  # Configuration for tweets-service
+  TWEETS_SERVICE_DB_URL: "jdbc:mysql://mysql-tweets-service:3306/tweetsdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true"

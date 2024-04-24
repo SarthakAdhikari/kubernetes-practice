@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            display: flex;
+            width: 90%;
+            justify-content: space-between;
+            margin: 0 auto;
+            gap: 20px;
+        }
+        .vertical-line {
+            width: 1px;
+            background-color: #ced4da;
+            height: 450px; /* Adjust based on actual content height */
+            align-self: center;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #343a40;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        form, #userList {
+            flex: 1;
+            background-color: #fff;
+            padding: 40px;
+            margin-left:200px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="email"], input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ced4da;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+        input[type="email"]:focus, input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #0056b3;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        #userList {
+            overflow-y: auto;
+            max-height: 400px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .user-count {
+            font-size: 16px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .bear {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0 auto 30px;
+        }
+        .bear.eyes-open {
+            background-image: url('https://i.redd.it/nwv98b9qax781.png');
+        }
+        .bear.eyes-closed {
+            background-image: url('https://static.vecteezy.com/system/resources/previews/009/637/592/non_2x/monkey-closed-eyes-cartoon-cute-animal-file-png.png');
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div>
+        <div class="bear eyes-open" id="bear"></div>
+        <h1>User Signup</h1>
+        <form id="signupForm">
+            Email: <input type="email" id="email" required><br>
+            First Name: <input type="text" id="firstName" required><br>
+            Password: <input type="password" id="password" required><br>
+            <button id="signupButton" type="submit">Sign Up</button>
+            <button class="autoButton" type="submit" onclick="autoClickSignup()">Auto signup once per second</button>
+        </form>
+    </div>
+    <div class="vertical-line"></div>
+    <div style="margin-right: 200px;margin-top: 60px;"
+    >
+        <h2 id="userCount">Users</h2>
+        <div id="userList"></div>
+    </div>
+</div>
+<script src="script.js"></script>
+<script>
+    let autoClickInterval = null;
+    function autoClickSignup() {
+        const signupButton = document.getElementById('signupButton');
+
+        if (autoClickInterval !== null) {
+            clearInterval(autoClickInterval);
+            autoClickInterval = null;
+            console.log('Auto-clicking stopped.');
+        } else {
+            autoClickInterval = setInterval(() => {
+                signupButton.click();
+                console.log('Button clicked automatically.');
+            }, 1000);
+            console.log('Auto-clicking started.');
+        }
+    }
+</script>
+</body>
+</html>

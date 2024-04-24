@@ -1,0 +1,7 @@
+resources:
+  - mysql/
+  - rabbitmq/
+  - tweet-service/
+  - user-service/
+  - web/
+
